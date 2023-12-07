@@ -38,12 +38,8 @@ public class FoodZillaTest_backup {
 		DesiredCapabilities dc = new DesiredCapabilities();
 		dc.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
 		dc.setCapability("platformName", "Android");
-//		dc.setCapability("udid", "R5CT61W9L0R");
-//		dc.setCapability(MobileCapabilityType.DEVICE_NAME, "SM A536U1");
 		dc.setCapability("udid", "8b42d3ae");
 		dc.setCapability(MobileCapabilityType.DEVICE_NAME, "SM A536U1");
-//		dc.setCapability("appPackage", "io.foodzilla.app");
-//		dc.setCapability("appActivity", "io.foodzilla.app.MainActivity");
 		dc.setCapability("appPackage", "io.foodzilla.app");
 		dc.setCapability("appActivity", "io.foodzilla.app.MainActivity");
 		dc.setCapability("noReset", "true");
@@ -75,8 +71,7 @@ public class FoodZillaTest_backup {
 			System.out.println("clicked on loggin button");
 
 			String enterEmailLocator = "//android.widget.EditText[@text='Enter email']";
-			// driver.findElementByXPath("//android.widget.EditText[@text='Enter
-			// email']").sendKeys("naga26.nagubandi@gmail.com");
+			
 			enterText(enterEmailLocator, "gaurav.sarkar830@gmail.com");
 
 			String enterPasswordLocator = "//android.widget.EditText[@text='Enter password']";
@@ -100,11 +95,6 @@ public class FoodZillaTest_backup {
 	public void clickElement(String xpathString) {
 		driver.findElementByXPath(xpathString).click();
 		 System.out.println("The element got clicked");
-		//driver.findElementByAndroidUIAutomator("new UiScrollable(new    UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().xpath(xpathString)").click(); //scroll down to the element and click
-		//driver.findElementByXPath(xpathString).
-	//	driver.findElementByAndroidUIAutomator("new UiScrollable(new    UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\"WebView\").instance(0))").click(); //scroll down to the element and click
-	//	String value = "(//androidx.cardview.widget.CardView//android.widget.FrameLayout//android.widget.ImageView)[17]";
-		//driver.findElementByAndroidUIAutomator("new UiScrollable(new    UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().xpath(value)").click(); //scroll down to the element and click
 
 	}
 
@@ -138,10 +128,6 @@ public class FoodZillaTest_backup {
 		for (String item : expectedItems) {
 			itemsNamesExpected.add(item);
 		}
-		// System.out.println("itemsNamesExpected " + itemsNamesExpected);
-
-		// itemsNamesExpected.add("Rice (0.1cup)");
-		// itemsNamesExpected.add("Chicken (200grams)");
 		return itemsNamesExpected;
 
 	}
@@ -149,33 +135,18 @@ public class FoodZillaTest_backup {
 
 	public String getGivenAlbum(String albumName) {
 		String albumNameDynamic = "//android.widget.TextView[@text='" + albumName + "']";
-
-		// //android.widget.TextView[@text='Downloads']
-		// System.out.println("printing album with passed name" + albumNameDynamic);
 		return albumNameDynamic;
 
 	}
 	
 
 	public void openGalleryAndSelectAlbum(String albumName, String imageIndex) throws InterruptedException {
-		// System.out.println("Importing from Gallery");
 
 		Thread.sleep(2000);
 		String openGalleryLocator = "//android.widget.TextView[@text='From Gallery']";
-		clickElement(openGalleryLocator);
-
-		//String selectAlbumLocator = "//android.widget.LinearLayout[@content-desc=\"Albums\"]/android.widget.TextView";
-//		clickElement(selectAlbumLocator);
-
-		// System.out.println("opening food album");		
+		clickElement(openGalleryLocator);		
 		String openFoodAlbum = getGivenAlbum(albumName);
 		clickElement(openFoodAlbum);
-
-
-		// (//android.widget.FrameLayout[@content-desc='Button']/android.widget.FrameLayout[2])[2]
-		//driver.findElementByAndroidUIAutomator("new UiScrollable(new    UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().xpath(value)").click(); //scroll down to the element and click
-//		String selectFoodPicture = "(//androidx.cardview.widget.CardView//android.widget.FrameLayout//android.widget.ImageView)[" + imageIndex + "]";
-//		String selectFoodPicture = "(//android.widget.FrameLayout)[" + imageIndex + "]";
 		
 		
 		//-----
@@ -191,10 +162,8 @@ public class FoodZillaTest_backup {
 	public void verifyExpectedAndActual(String[] expectedItems) {
 		boolean matches = false;
 		List<String> itemsNamesActual = getActualItems();
-		// System.out.println("itemsNamesActual " + itemsNamesActual);
-
+		
 		List<String> itemsNamesExpected = getExpectedItems(expectedItems);
-	//	int iterationCount = (itemsNamesExpected.size() > itemsNamesActual.size()) ? itemsNamesExpected.size(): itemsNamesActual.size();
 		
 		if(itemsNamesExpected.size() > itemsNamesActual.size()) {
 			for(String value: itemsNamesExpected) {
@@ -216,18 +185,14 @@ public class FoodZillaTest_backup {
 		}
 		
 		if (itemsNamesExpected.size() == itemsNamesActual.size()) {
-			//System.out.println("Expected = actual");
+		
 			matches = itemsNamesActual.equals(itemsNamesExpected);
 		}
 
-		// System.out.println("The two ist comparision " + matches);
-		// String message = "";
-
+	
 		if (itemsNamesActual.size() <= 0) {
 
-			// Sorry, we could not detect foods in this picture, click on "Add Foods" to
-			// analyse nutrition automatically.
-
+			
 			String noItemsSorry = "//android.view.ViewGroup//android.view.ViewGroup//android.widget.TextView[contains(@text,'Sorry')]";
 			String message = getText(noItemsSorry);
 			// String finalMessage = "The expected Items are " + itemsNamesExpected + "
